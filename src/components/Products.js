@@ -6,7 +6,7 @@ import { fetchProducts, STATUSES } from "../store/productSlice";
 const Products = () => {
   // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  const { data: products, state } = useSelector((state) => state.product);
+  const { data: products, status } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -25,28 +25,47 @@ const Products = () => {
     dispatch(add(product));
   };
 
-  if (state === STATUSES.LOADING) {
-    return <h3>Loading....</h3>;
+  if (status === STATUSES.LOADING) {
+    return (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-grow" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
-  if (state === STATUSES.ERROR) {
+  if (status === STATUSES.ERROR) {
     return <h2>Something went wrong!</h2>;
   }
   return (
-    <div className="productsWrapper">
-      {products.map((product) => (
-        <div className="card" key={product.id}>
-          <img src={product.image} alt="" />
-          <h4>{product.title}</h4>
-          <h5>${product.price}</h5>
-          <button className="btn" onClick={() => handleAdd(product)}>
-            Add to cart
-          </button>
+    <>
+      <div className="">
+        <div className="row row-cols-md-4 g-3">
+          {products.map((product) => (
+            <div className="col">
+              <div className="card" key={product.id}>
+                <img
+                  src={product.image}
+                  alt=""
+                  className="img-fluid p-5"
+                  style={{ width: "300px", height: "300px" }}
+                />
+                <h5 className="py-3">{product.title}</h5>
+                <h4 className="text-primary pb-3">${product.price}</h4>
+                <button
+                  className="btn btn-outline-success"
+                  onClick={() => handleAdd(product)}
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 
 export default Products;
-<h2>Proheu</h2>;

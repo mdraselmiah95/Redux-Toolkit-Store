@@ -6,6 +6,7 @@ const Navbar = () => {
   const items = useSelector((state) => state.cart);
   return (
     <div
+      className="navbar "
       style={{
         display: "flex",
         alignItems: "center",
@@ -20,7 +21,11 @@ const Navbar = () => {
         <Link className="navLink" to="/cart">
           Cart
         </Link>
-        <span className="cartCount">Cart items: {items.length}</span>
+
+        <button type="button" class="btn btn-primary ms-2">
+          Cart items:
+          <span class="badge text-bg-secondary">{items.length}</span>
+        </button>
       </div>
     </div>
   );
