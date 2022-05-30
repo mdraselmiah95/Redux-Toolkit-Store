@@ -22,5 +22,22 @@ const productSlice = createSlice({
       //     state.status = action.payload;
       // },
     },
+    extraReducers: (builder) => {
+      builder.addCase();
+    },
   },
 });
+
+export const { setProducts, setStatus } = productSlice.actions;
+export default productSlice.reducer;
+
+//Thunk
+export function fetchProducts() {
+  return async function fetchProductsThunk(dispatch, getState) {
+    try {
+      const res = await fetch("https://fakestoreapi.com/products");
+      const data = await res.json();
+      dispatch(setProducts(data));
+    } catch (error) {}
+  };
+}
