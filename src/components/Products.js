@@ -43,8 +43,8 @@ const Products = () => {
       <div className="">
         <div className="row row-cols-md-4 g-3">
           {products.map((product) => (
-            <div className="col">
-              <div className="card" key={product.id}>
+            <div className="col" key={product.id}>
+              <div className="card">
                 <img
                   src={product.image}
                   alt=""
